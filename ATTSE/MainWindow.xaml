@@ -1,0 +1,178 @@
+﻿<Window x:Class="ATTSE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ATTSE"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:vm="clr-namespace:ATTSE.Model"
+        mc:Ignorable="d"
+        Title="Automatic Test Tool for Screen Events"
+        Height="300" Width="690"
+        MinHeight="280" MinWidth="450"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown">
+    <Window.Resources>
+        <DataTemplate x:Key="InfoTemplate"></DataTemplate>
+        <ObjectDataProvider x:Key="eventType"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="vm:EventType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <ObjectDataProvider x:Key="actionType"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="vm:ActionType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:EventViewModel></vm:EventViewModel>
+    </Window.DataContext>
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="10,10,10,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="White"
+                BorderBrush="Gray"
+                BorderThickness="0">
+                <ListView Name="lstEvents" ItemsSource="{Binding Events}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="序号" Width="Auto"
+                                                DisplayMemberBinding="{Binding Path=ID}" />
+                                <GridViewColumn Header="事件类型" Width="80"
+                                                DisplayMemberBinding="{Binding Path=ScreenEventType, Converter={StaticResource EachEnumValueConverter}}" />
+                                <GridViewColumn Header="动作类型" Width="80"
+                                                DisplayMemberBinding="{Binding Path=ScreenActionType, Converter={StaticResource EachEnumValueConverter}}" />
+                                <GridViewColumn Header="延时时间" Width="80"
+                                                DisplayMemberBinding="{Binding Path=Timeout}" />
+                                <GridViewColumn Header="执行次数" Width="80"
+                                                DisplayMemberBinding="{Binding Path=Round}" />
+                                <GridViewColumn Header="坐标" Width="90"
+                                                DisplayMemberBinding="{Binding Path=Pt}" />
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+            <Border Grid.Column="1" Width="200"
+                    Margin="2,0,0,0"
+                    BorderBrush="Gray"
+                    BorderThickness="1">
+                <StackPanel Margin="0,0,3,0"
+                            DataContext="{Binding ElementName=lstEvents, Path=SelectedItem}">
+                    <Label HorizontalAlignment="Center">事件属性</Label>
+                    <DockPanel Grid.Row="0" Margin="2,2,0,2">
+                        <Label DockPanel.Dock="Left"
+                           Width="60">事件类型</Label>
+                        <ComboBox Name="comboboxEventTye"
+                                  DockPanel.Dock="Right"
+                                  ItemsSource="{Binding Source={StaticResource eventType},
+                                                        Mode=OneTime,
+                                                        Converter={StaticResource EnumValuesConverter}}"
+                                  SelectedIndex="{Binding Path=ScreenEventType, Converter={StaticResource EnumToIntConverter}}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Margin="2,2,0,2">
+                        <Label DockPanel.Dock="Left"
+                           Width="60">动作类型</Label>
+                        <ComboBox Name="comboboxActionType" 
+                                  DockPanel.Dock="Right"
+                                  ItemsSource="{Binding Source={StaticResource actionType},
+                                                        Mode=OneTime,
+                                                        Converter={StaticResource EnumValuesConverter}}"
+                                  SelectedIndex="{Binding Path=ScreenActionType, Converter={StaticResource EnumToIntConverter}}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Margin="2,2,0,2">
+                        <Label DockPanel.Dock="Left"
+                           Width="60">延时(ms)</Label>
+                        <TextBox DockPanel.Dock="Right" TextAlignment="Right"
+                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                 DataObject.Pasting="NumberTextBox_Pasting"
+                                 Text="{Binding Path=Timeout}"></TextBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Margin="2,2,0,2">
+                        <Label DockPanel.Dock="Left"
+                           Width="60">执行次数</Label>
+                        <TextBox DockPanel.Dock="Right" TextAlignment="Right"
+                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                 DataObject.Pasting="NumberTextBox_Pasting"
+                                 Text="{Binding Path=Round}"></TextBox>
+                    </DockPanel>
+                    <DockPanel Grid.Row="0" Margin="2,2,0,2">
+                        <Label DockPanel.Dock="Left"
+                           Width="60">坐标(x, y)</Label>
+                        <Grid DockPanel.Dock="Right">
+                            <TextBox DockPanel.Dock="Right" 
+                                 HorizontalAlignment="Left"
+                                 Width="60" TextAlignment="Right"
+                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                 DataObject.Pasting="NumberTextBox_Pasting"
+                                 Text="{Binding Path=Pt.X}"></TextBox>
+                            <TextBox DockPanel.Dock="Right" 
+                                 HorizontalAlignment="Right"
+                                 Width="60" TextAlignment="Right"
+                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
+                                 DataObject.Pasting="NumberTextBox_Pasting"
+                                 Text="{Binding Path=Pt.Y}"></TextBox>
+                        </Grid>
+                    </DockPanel>
+                    <!--Button HorizontalAlignment="Center"
+                            Width="75" Height="22">
+                        确定
+                    </Button-->
+                </StackPanel>
+            </Border>
+
+        </Grid>
+
+        <DockPanel Grid.Row="1" Margin="10,5,10,5">
+            <Label Name="round_label" Margin="0,3,3,3"
+                   DockPanel.Dock="Left"
+                   FontSize="12"
+                   HorizontalAlignment="Right">
+                循环次数
+            </Label>
+            <TextBox Margin="0,3,0,3" Name="round_count"
+                     DockPanel.Dock="Left"
+                     FontSize="12" TextAlignment="Right"
+                     PreviewTextInput="NumberTextBox_PreviewTextInput"
+                     DataObject.Pasting="NumberTextBox_Pasting"
+                     Width="60" Height="22">
+                0
+            </TextBox>
+            <Button Margin="8,3,0,3" Name="delete"
+                    Width="75" Height="22"
+                    DockPanel.Dock="Right"
+                    FontSize="12"
+                    Click="delete_Click">
+                删除(D)
+            </Button>
+            <!--Button Margin="8,3,0,3" Name="stop"
+                    Width="75" Height="22"
+                    DockPanel.Dock="Right"
+                    FontSize="12"
+                    Click="stop_Click">
+                停止(S)
+            </Button-->
+            <Button Margin="0,3,0,3" Name="start"
+                    DockPanel.Dock="Right"
+                    Width="75" Height="22"
+                    FontSize="12"
+                    Click="start_Click">
+                开始(S)
+            </Button>
+            <Border DockPanel.Dock="Right"></Border>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,12 @@
+﻿<Application x:Class="ATTSE.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ATTSE"
+             xmlns:ec="clr-namespace:ATTSE.Model.Converter"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ec:EachEnumValueConverter x:Key="EachEnumValueConverter" />
+        <ec:EnumValuesConverter x:Key="EnumValuesConverter" />
+        <ec:EnumToIntConverter x:Key="EnumToIntConverter" />
+    </Application.Resources>
+</Application>
