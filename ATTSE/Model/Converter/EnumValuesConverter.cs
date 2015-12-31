@@ -15,8 +15,16 @@ using System.Linq;
 
 namespace ATTSE.Model.Converter
 {
+    /// <summary>
+    /// 批量枚举类型转换器
+    /// </summary>
     public class EnumValuesConverter : EnumToDescriptionConverter
     {
+        /// <summary>
+        /// 将枚举类型值转换为列表
+        /// </summary>
+        /// <param name="enumObjs">待转换的枚举类型</param>
+        /// <returns>转换后的列表（List）</returns>
         protected override object ConvertToDescription(object enumObjs)
         {
             try

@@ -12,6 +12,9 @@ using System.Collections.ObjectModel;
 
 namespace ATTSE.Model
 {
+    /// <summary>
+    /// 事件 VM
+    /// </summary>
     class EventViewModel
     {
         #region Members

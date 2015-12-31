@@ -18,6 +18,9 @@ using System.Windows.Data;
 
 namespace ATTSE.Model.Converter
 {
+    /// <summary>
+    /// 枚举类型转换器
+    /// </summary>
     public abstract class EnumToDescriptionConverter : IValueConverter
     {
         protected static Dictionary<Type, Dictionary<object, string>> enumsDic 
@@ -50,6 +53,10 @@ namespace ATTSE.Model.Converter
             }
         }
 
+        /// <summary>
+        /// Dictionary 初始化，在第一次转换枚举类型时解析转换该类型的所有枚举值存入 Dictionary
+        /// </summary>
+        /// <param name="enumObj">待转换的枚举类型</param>
         protected void initializeDic(object enumObj)
         {
             Type type = enumObj.GetType();

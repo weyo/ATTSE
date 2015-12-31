@@ -13,6 +13,9 @@ using System.Runtime.InteropServices;
 
 namespace ATTSE.Model.Utility
 {
+    /// <summary>
+    /// 光标操作工具类
+    /// </summary>
     public class CursorUtility
     {
         [DllImport("user32.dll")]

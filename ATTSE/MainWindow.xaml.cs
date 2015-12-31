@@ -83,6 +83,11 @@ namespace ATTSE
             }
         }
 
+        /// <summary>
+        /// 全局按键捕捉，记录按下“Ctrl + K”键时的鼠标位置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
@@ -108,11 +113,21 @@ namespace ATTSE
             return !(regex.IsMatch(text));
         }
         
+        /// <summary>
+        /// 文本框输入规则（不允许非数字）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
         }
 
+        /// <summary>
+        /// 文本框粘贴规则（不允许非数字）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NumberTextBox_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof(String)))

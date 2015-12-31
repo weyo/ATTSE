@@ -11,6 +11,9 @@
 
 namespace ATTSE.Model.Converter
 {
+    /// <summary>
+    /// 基本枚举-字符串转换器
+    /// </summary>
     public class EachEnumValueConverter : EnumToDescriptionConverter
     {
         protected override object ConvertToDescription(object enumObj)

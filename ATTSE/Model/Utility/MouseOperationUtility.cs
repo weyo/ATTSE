@@ -8,17 +8,18 @@
 * ------------------------------------------------------------
 * V0.01   2015/12/29 15:52:37  Yohn    Initial version
 */
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 
 namespace ATTSE.Model.Utility
 {
+    /// <summary>
+    /// 鼠标操作类
+    /// </summary>
     public class MouseOperationUtility
     {
+        #region Constants
         private const int MOUSEEVENT_MOVE = 0x00;
         private const int MOUSEEVENT_LEFTDOWN = 0x02;
         private const int MOUSEEVENT_LEFTUP = 0x04;
@@ -26,7 +27,9 @@ namespace ATTSE.Model.Utility
         private const int MOUSEEVENT_RIGHTUP = 0x10;
         private const int MOUSEEVENT_LEFT_UP_AND_DOWN = MOUSEEVENT_LEFTDOWN | MOUSEEVENT_LEFTUP;
         private const int MOUSEEVENT_RIGHT_UP_AND_DOWN = MOUSEEVENT_RIGHTDOWN | MOUSEEVENT_RIGHTUP;
-        
+        #endregion
+
+        #region Static Fields
         private static MouseEvent MOUSE_LEFT_CLICK = new MouseEvent(MOUSEEVENT_LEFT_UP_AND_DOWN, MouseClick);
         private static MouseEvent MOUSE_RIGHT_CLICK = new MouseEvent(MOUSEEVENT_RIGHT_UP_AND_DOWN, MouseClick);
         private static MouseEvent MOUSE_LEFT_DOUBLE_CLICK = new MouseEvent(MOUSEEVENT_LEFT_UP_AND_DOWN, MouseDoubleClick);
@@ -34,7 +37,9 @@ namespace ATTSE.Model.Utility
         private static MouseEvent MOUSE_MOVEMENT = new MouseEvent(MOUSEEVENT_MOVE, MouseMove);
 
         private static Dictionary<ActionType, MouseEvent> actionMap = new Dictionary<ActionType, MouseEvent>();
+        #endregion
 
+        #region Constructors
         static MouseOperationUtility()
         {
             actionMap.Add(ActionType.LEFT_MOUSE_CLICK, MOUSE_LEFT_CLICK);
@@ -43,9 +48,13 @@ namespace ATTSE.Model.Utility
             actionMap.Add(ActionType.RIGHT_MOUSE_DOUBLE_CLICK, MOUSE_RIGHT_DOUBLE_CLICK);
             actionMap.Add(ActionType.MOUSE_MOVE, MOUSE_MOVEMENT);
         }
+        #endregion
 
+        #region Delegates
         public delegate void Click(int mouseEvent, Point point);
+        #endregion
 
+        #region Methods
         private static void MouseMove(int m, Point p)
         {
             // Do nothing.
@@ -79,7 +88,9 @@ namespace ATTSE.Model.Utility
             Click clicker = me.clicker;
             clicker.Invoke(me.device, point);
         }
+        #endregion
 
+        #region Structs
         internal struct MouseEvent
         {
             public int device;
@@ -91,5 +102,6 @@ namespace ATTSE.Model.Utility
                 clicker = ck;
             }
         }
+        #endregion
     }
 }
