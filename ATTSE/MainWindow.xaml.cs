@@ -28,7 +28,7 @@ namespace ATTSE
             int roundCount = Convert.ToInt32(round_count.Text);
             if (roundCount < 1)
             {
-                MessageBox.Show("请设置循环次数！");
+                MessageBox.Show("请设置正确的循环次数！（循环次数 > 0）");
                 return;
             }
             else if (model.Events.Count < 1)
