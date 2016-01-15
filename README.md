@@ -2,7 +2,7 @@
 
 ATTSE(Automatic Test Tool for Screen Events) 是一个简单的屏幕录制工具，主要用于前端相关的自动化测试。
 
-本项目参考自[搜狗公司](https://github.com/sogou)的[Test-ClickPrograme](https://github.com/sogou/Test-ClickPrograme)项目，并使用 `WPF` + `.Net Frameword 3.5` 构建，支持 Windows XP 及以上系统。
+本项目参考自[搜狗公司](https://github.com/sogou)的[Test-ClickPrograme](https://github.com/sogou/Test-ClickPrograme)项目，并使用 `WPF` + `.Net Framework 3.5` 重新进行了构建，支持 Windows XP 及以上系统。
 
 ![Interface](https://raw.githubusercontent.com/2079/ATTSE/master/images/interface.png)
 
@@ -40,3 +40,4 @@ ATTSE(Automatic Test Tool for Screen Events) 是一个简单的屏幕录制工�
 - 批量删除/移动事件
 - 本地导入/导出事件列表
 - 使用帮助
+- 全局坐标显示

@@ -13,7 +13,6 @@
         WindowStartupLocation="CenterScreen"
         KeyDown="Window_KeyDown">
     <Window.Resources>
-        <DataTemplate x:Key="InfoTemplate"></DataTemplate>
         <ObjectDataProvider x:Key="eventType"
                             MethodName="GetValues"
                             ObjectType="{x:Type sys:Enum}">
@@ -113,18 +112,20 @@
                         <Label DockPanel.Dock="Left"
                            Width="60">坐标(x, y)</Label>
                         <Grid DockPanel.Dock="Right">
-                            <TextBox DockPanel.Dock="Right" 
-                                 HorizontalAlignment="Left"
-                                 Width="60" TextAlignment="Right"
-                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
-                                 DataObject.Pasting="NumberTextBox_Pasting"
-                                 Text="{Binding Path=Pt.X}"></TextBox>
-                            <TextBox DockPanel.Dock="Right" 
-                                 HorizontalAlignment="Right"
-                                 Width="60" TextAlignment="Right"
-                                 PreviewTextInput="NumberTextBox_PreviewTextInput"
-                                 DataObject.Pasting="NumberTextBox_Pasting"
-                                 Text="{Binding Path=Pt.Y}"></TextBox>
+                            <TextBox TextAlignment="Center" 
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Center"
+                                     Background="WhiteSmoke"
+                                     Foreground="DimGray"
+                                     Width="60" IsReadOnly="True" 
+                                     Text="{Binding Path=Pt.X}"></TextBox>
+                            <TextBox TextAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Center"
+                                     Background="WhiteSmoke"
+                                     Foreground="DimGray"
+                                     Width="60" IsReadOnly="True" 
+                                     Text="{Binding Path=Pt.Y}"></TextBox>
                         </Grid>
                     </DockPanel>
                     <!--Button HorizontalAlignment="Center"
